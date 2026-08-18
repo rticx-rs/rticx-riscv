@@ -1,0 +1,10 @@
+[workspace]
+# Default is `true` (publish on every push) — MUST be false so we only
+# publish when the release PR is merged.
+release_always = false
+repo_url = "https://github.com/rticx-rs/rticx-riscv"
+
+[[package]]
+name = "rticx-riscv"
+publish_features = ["esp32c3"]   # esp32c3 path compiles on host -> real verification
+semver_check = false            # host-incompatible crate (cargo-semver-checks can't build it)

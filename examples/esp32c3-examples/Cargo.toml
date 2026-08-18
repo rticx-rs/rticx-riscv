@@ -23,7 +23,7 @@ required-features = ["async"]
 rticx-riscv = { path = "../../", default-features = false, features = [
     "esp32c3",
 ] }
-rticx-async = { path = "../../../../rticx-async", optional = true }
+rticx-async = { version = "0.2", optional = true }
 esp-backtrace = { version = "0.19.0", features = [
     "esp32c3",
     "panic-handler",

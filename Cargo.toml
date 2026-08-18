@@ -5,7 +5,7 @@ edition = "2024"
 authors = ["Zakaria Madaoui"]
 description = "RTICX distribution for single-core RISC-V targets (generic SLIC, ESP32-C3, ESP32-C6)"
 license = "MIT"
-repository = "https://github.com/rticx-rs/rticx"
+repository = "https://github.com/rticx-rs/rticx-riscv"
 homepage = "https://github.com/rticx-rs/rticx/wiki"
 keywords = ["rtic", "rticx", "risc-v", "riscv", "embedded"]
 categories = ["no-std", "embedded"]
@@ -36,10 +36,10 @@ esp32c6 = { version = "0.23.2", optional = true, default-features = false, featu
 critical-section = { version = "1.2", optional = true }
 
 # Async runtime, needed when `async` feature is enabled
-rticx-async = { version = "0.2.0", path = "../../rticx-async", optional = true }
+rticx-async = { version = "0.2", optional = true }
 
 # Queue type to be used by software/async passes
-rticx-spsc = { version = "0.2.0", path = "../../rticx-spsc" }
+rticx-spsc = { version = "0.2" }
 
 [features]
 

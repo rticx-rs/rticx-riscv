@@ -1493,6 +1493,8 @@ dependencies = [
 [[package]]
 name = "rticx-async"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ccbc31147fe9f818e7e6ef4d85d0488bc946dd332f141b66cde168d5b0b04d9e"
 dependencies = [
  "critical-section",
  "heapless 0.9.3",
@@ -1502,6 +1504,8 @@ dependencies = [
 [[package]]
 name = "rticx-async-pass"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0d56354c24c568be9409281a0a45a85a4e1d06e51413fbc9b15e9d0b6664e6c"
 dependencies = [
  "heck 0.5.0",
  "proc-macro2",
@@ -1514,6 +1518,8 @@ dependencies = [
 [[package]]
 name = "rticx-core"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "66031538a5ab087918527cd86bd0a44ff827c6d705586d29e5678e001c139b19"
 dependencies = [
  "derive_builder",
  "heck 0.4.1",
@@ -1553,10 +1559,14 @@ dependencies = [
 [[package]]
 name = "rticx-spsc"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "15d584bacbeefdbffb767a830a081be2bccdad91ba0efdefda4614cb9b306795"
 
 [[package]]
 name = "rticx-sw-pass"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2ad5f9a75a22b09eb3994d94b815e67b14844c2f5aca364ac140d65a7842b5c2"
 dependencies = [
  "heck 0.5.0",
  "proc-macro2",
