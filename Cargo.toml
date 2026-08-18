@@ -23,7 +23,7 @@ riscv = { version = "0.16.1"}
 riscv-slic = { version = "0.2", optional = true, default-features = false }
 
 # Espressif ESP32-C3 PAC (`esp32c3` feature)
-esp32c3 = { version = "0.31.0", optional = true, default-features = false, features = [
+esp32c3 = { version = "0.32.2", optional = true, default-features = false, features = [
     "critical-section",
 ] }
 
