@@ -1,5 +1,10 @@
 # rticx-riscv
 
+[![crates.io](https://img.shields.io/crates/v/rticx-riscv)](https://crates.io/crates/rticx-riscv)
+[![wiki](https://img.shields.io/badge/docs-wiki-red)](https://github.com/rticx-rs/rticx/wiki/)
+[![CI](https://github.com/rticx-rs/rticx-riscv/actions/workflows/ci.yml/badge.svg)](https://github.com/rticx-rs/rticx-riscv/actions/workflows/ci.yml)
+[![QEMU](https://github.com/rticx-rs/rticx-riscv/actions/workflows/qemu.yml/badge.svg)](https://github.com/rticx-rs/rticx-riscv/actions/workflows/qemu.yml)
+
 RTICX distribution for single-core RISC-V targets. Supports three mutually
 exclusive backends, each providing the low-level interrupt controller bindings,
 resource locking, and software-task infrastructure.
