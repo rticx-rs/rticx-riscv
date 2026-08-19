@@ -16,7 +16,7 @@ test = false
 bench = false
 
 [dependencies]
-rticx-riscv-macro = { version = "0.2.0", path = "rticx-macro" }
+rticx-riscv-macro = { version = "0.2.1", path = "rticx-macro" }
 
 riscv = { version = "0.16.1"}
 # Generic RISC-V SLIC backend (`slic` feature)
@@ -99,4 +99,4 @@ members = ["rticx-macro", "examples/slic-examples", "examples/esp32c3-examples"]
 
 [workspace.package]
 # distro + macro pair is version-locked together (see COMPATIBILITY.md)
-version = "0.2.0"
+version = "0.2.1"
