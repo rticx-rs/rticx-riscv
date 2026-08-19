@@ -15,7 +15,7 @@ rticx-riscv = { path = "../../", default-features = false, features = [
 # rticx-riscv = { path = "../../", default-features = false, features = ["slic", "mecall-backend", "swtasks"] }
 hifive1 = { version = "0.13.0", features = ["board-redv"] }
 riscv-rt = { version = "0.13.0", features = ["single-hart"] }
-riscv = "0.12.1"
+riscv = "0.16.1"
 semihosting = { version = "0.1", features = ["stdio", "panic-handler"] }
 
 [profile.dev]
