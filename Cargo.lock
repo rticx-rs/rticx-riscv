@@ -1533,7 +1533,7 @@ dependencies = [
 
 [[package]]
 name = "rticx-riscv"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "critical-section",
  "esp32c3 0.31.0",
@@ -1547,7 +1547,7 @@ dependencies = [
 
 [[package]]
 name = "rticx-riscv-macro"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "proc-macro2",
  "quote",
