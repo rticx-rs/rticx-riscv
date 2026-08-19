@@ -854,10 +854,11 @@ dependencies = [
 
 [[package]]
 name = "esp32c6"
-version = "0.23.2"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c58f34ff2633968c12125efc7f4f8f101078d5d34c7cb60eab82268db20986f9"
+checksum = "8f5e511df672d79cd63365c92045135e01ba952b6bddd25b660baff5e1110f6b"
 dependencies = [
+ "critical-section",
  "vcell",
 ]
 
@@ -1536,7 +1537,7 @@ version = "0.2.0"
 dependencies = [
  "critical-section",
  "esp32c3 0.31.0",
- "esp32c6 0.23.2",
+ "esp32c6 0.22.0",
  "riscv 0.16.1",
  "riscv-slic",
  "rticx-async",
