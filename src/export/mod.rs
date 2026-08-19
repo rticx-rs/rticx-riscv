@@ -57,9 +57,18 @@ where
 /// Read the stack pointer.
 #[inline(always)]
 pub fn read_sp() -> u32 {
-    let r;
-    unsafe { core::arch::asm!("mv {}, sp", out(reg) r, options(nomem, nostack, preserves_flags)) };
-    r
+    #[cfg(target_arch = "riscv32")]
+    {
+        let r;
+        unsafe {
+            core::arch::asm!("mv {}, sp", out(reg) r, options(nomem, nostack, preserves_flags))
+        };
+        r
+    }
+    #[cfg(not(target_arch = "riscv32"))]
+    {
+        unimplemented!("reading the stack pointer is only supported on RISC-V targets")
+    }
 }
 
 /// Startup stack-overflow check.
