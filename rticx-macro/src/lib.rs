@@ -1,4 +1,7 @@
-use std::cell::OnceCell;
+use std::{
+    cell::OnceCell,
+    sync::atomic::{AtomicBool, Ordering},
+};
 
 use proc_macro::TokenStream;
 use proc_macro2::{Span, TokenStream as TokenStream2};
@@ -38,6 +41,8 @@ pub fn app(args: TokenStream, input: TokenStream) -> TokenStream {
     }
     builder.build_rtic_macro(args, input)
 }
+
+static ENABLE_GLOBAL_INTERRUPTS: AtomicBool = AtomicBool::new(true);
 
 #[derive(Default)]
 struct BackendImpl {
@@ -190,14 +195,18 @@ impl CorePassBackend for BackendImpl {
 
     /// Statement enabling global interrupts before the idle loop.
     fn generate_enable_global_interrupts(&self) -> Option<TokenStream2> {
-        Some(quote!({
-            // SAFETY: the runtime is fully initialized at this point (init,
-            // task inits and post_init have all run) and the interrupt
-            // controller is configured, so global interrupts can be enabled.
-            unsafe {
-                rticx_riscv::export::interrupt::enable();
-            }
-        }))
+        if ENABLE_GLOBAL_INTERRUPTS.load(Ordering::SeqCst) {
+            Some(quote!({
+                // SAFETY: the runtime is fully initialized at this point (init,
+                // task inits and post_init have all run) and the interrupt
+                // controller is configured, so global interrupts can be enabled.
+                unsafe {
+                    rticx_riscv::export::interrupt::enable();
+                }
+            }))
+        } else {
+            None
+        }
     }
 
     /// Target specific global definitions
@@ -211,14 +220,48 @@ impl CorePassBackend for BackendImpl {
             // The SLIC requires us to call to the [`rticx_riscv::export::codegen`] macro to generate
             // the appropriate SLIC structure, interrupt enumerations, etc.
             let mut stmts = vec![];
-            let used_irqs = app_analysis.used_irqs.iter().map(|irq| &irq.name);
+
+            let used_irqs: Vec<syn::Ident> = app_analysis
+                .used_irqs
+                .iter()
+                .map(|irq| irq.name.clone())
+                .collect();
+            ENABLE_GLOBAL_INTERRUPTS.store(!used_irqs.is_empty(), Ordering::SeqCst);
+
+            // The sw/async passes always emit a `__rticx_local_irq_pend`
+            // helper taking a `slic::SoftwareInterrupt`, so the enum must
+            // exist even for apps without software interrupts (e.g. only
+            // `priority = 0` async tasks).
+            // generate empty SoftwareInterrupt type in this case
+            if used_irqs.is_empty() {
+                stmts.push(quote!(
+                    mod slic {
+                        #[derive(Copy, Clone)]
+                        pub struct SoftwareInterrupt;
+
+                        unsafe impl rticx_riscv::export::InterruptNumber for SoftwareInterrupt {
+                            const MAX_INTERRUPT_NUMBER: u16 = 0;
+
+                            #[inline]
+                            fn number(self) -> u16 {
+                                unreachable!()
+                            }
+
+                            #[inline]
+                            fn from_number(_value: u16) -> Result<Self, u16> {
+                                unreachable!()
+                            }
+                        }
+                    }
+                ));
+            }
             let device = &app_args.pacs[0];
             let slic = quote! {rticx_riscv::export::riscv_slic};
 
-            if cfg!(feature = "clint-backend") {
+            if cfg!(feature = "clint-backend") && !used_irqs.is_empty() {
                 let hart_id = syn::Ident::new(&format!("H{}", app_info.core), Span::call_site());
                 stmts.push(quote!(rticx_riscv::export::codegen!(slic = #slic, pac = #device, swi = [#(#used_irqs,)*], backend = [hart_id = #hart_id]);));
-            } else if cfg!(feature = "mecall-backend") {
+            } else if cfg!(feature = "mecall-backend") && !used_irqs.is_empty() {
                 stmts.push(quote!(rticx_riscv::export::codegen!(slic = #slic, pac = #device, swi = [#(#used_irqs,)*]);));
             }
 

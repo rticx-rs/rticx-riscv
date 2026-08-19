@@ -10,7 +10,6 @@ path = "examples/hello_rtic.rs"
 
 [dependencies]
 rticx-riscv = { path = "../../", default-features = false, features = [
-    "slic",
     "swtasks",
 ] }
 # rticx-riscv = { path = "../../", default-features = false, features = ["slic", "mecall-backend", "swtasks"] }
