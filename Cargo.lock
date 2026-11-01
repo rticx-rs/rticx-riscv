@@ -572,16 +572,16 @@ dependencies = [
 
 [[package]]
 name = "esp-bootloader-esp-idf"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "02a56964ab5479ac20c9cf76fa3b0d3f2233b20b5d8554e81ef5d65f63c20567"
+checksum = "35ffc117c3a9859835d89d0e90f5ee9886ce2264a71a849a7a22ab5308f6653c"
 dependencies = [
  "cfg-if",
  "document-features",
  "embedded-storage",
- "esp-config 0.6.1",
- "esp-hal-procmacros 0.21.0",
- "esp-metadata-generated 0.3.0",
+ "esp-config 0.7.0",
+ "esp-hal-procmacros 0.22.0",
+ "esp-metadata-generated 0.4.0",
  "esp-rom-sys",
  "jiff",
  "strum",
@@ -598,19 +598,6 @@ dependencies = [
  "evalexpr",
  "serde",
  "serde_yaml",
-]
-
-[[package]]
-name = "esp-config"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "102871054f8dd98202177b9890cb4b71d0c6fe1f1413b7a379a8e0841fc2473c"
-dependencies = [
- "document-features",
- "esp-metadata-generated 0.3.0",
- "serde",
- "serde_yaml",
- "somni-expr",
 ]
 
 [[package]]
@@ -661,7 +648,7 @@ dependencies = [
  "esp32h2",
  "esp32s2",
  "esp32s3",
- "fugit",
+ "fugit 0.3.9",
  "instability",
  "nb 1.1.0",
  "paste",
@@ -693,9 +680,9 @@ dependencies = [
 
 [[package]]
 name = "esp-hal-procmacros"
-version = "0.21.0"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3e025a7a7a0affdb4ff913b5c4494aef96ee03d085bf83c27453ae3a71d50da6"
+checksum = "6aebfabb2c21bec45e575e4f6cb6bb7aa8e1b33e7ac45b5dffa0f9d33ff59105"
 dependencies = [
  "document-features",
  "proc-macro-crate",
@@ -728,12 +715,6 @@ checksum = "189d36b8c8a752bdebec67fd02a15ebb1432feea345553749bca7ce2393cc795"
 dependencies = [
  "esp-metadata",
 ]
-
-[[package]]
-name = "esp-metadata-generated"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a93e39c8ad8d390d248dc7b9f4b59a873f313bf535218b8e2351356972399e3"
 
 [[package]]
 name = "esp-metadata-generated"
@@ -829,7 +810,6 @@ version = "0.31.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "356af3771d0d6536c735bf71136594f4d1cbb506abf6e0c51a6639e9bf4e7988"
 dependencies = [
- "critical-section",
  "vcell",
 ]
 
@@ -854,11 +834,10 @@ dependencies = [
 
 [[package]]
 name = "esp32c6"
-version = "0.22.0"
+version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f5e511df672d79cd63365c92045135e01ba952b6bddd25b660baff5e1110f6b"
+checksum = "f90472d3e6a752e5d20533796f649760103ea449319f14d2a26b2fdff95633bb"
 dependencies = [
- "critical-section",
  "vcell",
 ]
 
@@ -915,6 +894,15 @@ name = "fugit"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4e639847d312d9a82d2e75b0edcc1e934efcc64e6cb7aa94f0b1fbec0bc231d6"
+dependencies = [
+ "gcd",
+]
+
+[[package]]
+name = "fugit"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60ee0e9ed8a394868ee05cde8705cbd8dbfc95f88e14a57134323e799bd3912a"
 dependencies = [
  "gcd",
 ]
@@ -1465,13 +1453,13 @@ dependencies = [
 
 [[package]]
 name = "rtic-monotonics"
-version = "2.2.1"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d12a5e827e4a491affc0296b7c33242f03c02ef70150f93912cc9c77bb071f65"
+checksum = "194e0a2ddee283d3638c1fba13a334674e917fd071016de7ce456b9ebb4bce55"
 dependencies = [
  "cfg-if",
  "esp32c3 0.31.0",
- "fugit",
+ "fugit 0.6.0",
  "portable-atomic",
  "riscv 0.16.1",
  "rtic-time",
@@ -1479,14 +1467,14 @@ dependencies = [
 
 [[package]]
 name = "rtic-time"
-version = "2.0.1"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61485474f5a23247ae1d4875f2bfe860be9b3030dbf87c232e50799e021429a1"
+checksum = "fdd4326c8a634eee532fd79b7ccb6b8c54931c588a582e7326c8281354219a6e"
 dependencies = [
  "critical-section",
  "embedded-hal 1.0.0",
  "embedded-hal-async",
- "fugit",
+ "fugit 0.6.0",
  "futures-util",
  "rtic-common",
 ]
@@ -1536,8 +1524,8 @@ name = "rticx-riscv"
 version = "0.2.1"
 dependencies = [
  "critical-section",
- "esp32c3 0.31.0",
- "esp32c6 0.22.0",
+ "esp32c3 0.32.2",
+ "esp32c6 0.25.0",
  "riscv 0.16.1",
  "riscv-slic",
  "rticx-async",
@@ -1554,7 +1542,7 @@ dependencies = [
  "rticx-async-pass",
  "rticx-core",
  "rticx-sw-pass",
- "syn 2.0.119",
+ "syn 3.0.3",
 ]
 
 [[package]]
@@ -1585,7 +1573,7 @@ dependencies = [
  "esp-bootloader-esp-idf",
  "esp-hal",
  "esp-println",
- "esp32c3 0.31.0",
+ "esp32c3 0.32.2",
  "riscv-semihosting",
  "rtic-monotonics",
  "rticx-async",
@@ -1597,7 +1585,7 @@ name = "rticx_riscv_example_slic"
 version = "0.1.0"
 dependencies = [
  "hifive1",
- "riscv 0.12.1",
+ "riscv 0.16.1",
  "riscv-rt",
  "rticx-riscv",
  "semihosting",
